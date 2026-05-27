@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoomBook - Plateforme de reservation</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: rgba(15, 23, 42, 0.82);
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 26px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .card {
+      background-color: var(--card);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--accent);
+      color: #0f172a;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>RoomBook</h1>
+    <p class="subtitle">
+      Plateforme de reservation de salles pour organiser facilement les disponibilites,
+      eviter les conflits de planning et centraliser les demandes.
+    </p>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Gestion des salles</h2>
+        <p>Ajoute et consulte les salles disponibles avec leur capacite et leurs equipements.</p>
+      </article>
+      <article class="card">
+        <h2>Reservations rapides</h2>
+        <p>Reserve un creneau en quelques secondes et visualise les disponibilites en temps reel.</p>
+      </article>
+      <article class="card">
+        <h2>Suivi centralise</h2>
+        <p>Retrouve toutes les reservations sur un seul espace pour une meilleure organisation.</p>
+      </article>
+    </section>
+
+    <a class="cta" href="#">Commencer</a>
+    <p class="footer">Projet DevOps - Docker, API, PostgreSQL</p>
+  </main>
+</body>
+</html>
