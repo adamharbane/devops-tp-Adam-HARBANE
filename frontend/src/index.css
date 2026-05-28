@@ -1,12 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #eef2f8;
+  --color-bg-accent: #dce6f5;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f6f8fc;
+  --color-text: #1a2a49;
+  --color-text-muted: #5f6f8a;
+  --color-heading: #12203a;
+  --color-border: #d7deea;
+  --color-border-strong: #bcc6d6;
+  --color-primary: #2f5bae;
+  --color-primary-soft: #e8effb;
+  --color-primary-hover: #244a8f;
+  --color-danger: #9e2141;
+  --color-danger-soft: #fdeef2;
+  --font-family: 'Segoe UI', Inter, Roboto, Arial, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 4px 14px rgba(26, 42, 73, 0.06);
+  --shadow-md: 0 10px 28px rgba(26, 42, 73, 0.1);
+  --shadow-active: 0 12px 24px rgba(47, 91, 174, 0.18);
+  --transition: 0.18s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Inter, 'Segoe UI', Roboto, Arial, sans-serif;
-  background: #f4f6fb;
-  color: #1a2a49;
+  font-family: var(--font-family);
+  background: linear-gradient(165deg, var(--color-bg-accent) 0%, var(--color-bg) 45%, var(--color-bg) 100%);
+  color: var(--color-text);
+  line-height: 1.5;
 }
 
 #root {
-  width: min(1180px, 100%);
+  width: min(1200px, 100%);
   margin: 0 auto;
   min-height: 100vh;
+  padding: 0 1rem 2rem;
 }
