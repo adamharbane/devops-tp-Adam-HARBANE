@@ -1,27 +1,28 @@
 .page {
-  padding: 2rem;
+  padding: var(--space-xl);
 }
 
 .page-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-lg);
   text-align: left;
 }
 
 .page-header h1 {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
+  color: var(--color-heading);
 }
 
 .layout {
   display: grid;
   grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 1fr);
-  gap: 1rem;
+  gap: var(--space-md);
 }
 
 .panel {
-  background: #ffffff;
-  border: 1px solid #dbe0e8;
-  border-radius: 16px;
-  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
   text-align: left;
 }
 
@@ -29,26 +30,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 .panel h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: var(--font-size-xl);
+  color: var(--color-heading);
 }
 
 .secondary-btn {
-  border: 1px solid #bcc6d6;
-  background: #f8f9fc;
-  border-radius: 10px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
   padding: 0.45rem 0.7rem;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
 }
 
 .secondary-btn:hover {
-  background: #eff3fb;
+  border-color: var(--color-primary-hover);
+  background: var(--color-surface);
 }
 
 .room-list {
@@ -62,22 +67,22 @@
 .room-card {
   width: 100%;
   text-align: left;
-  border: 1px solid #d7deea;
-  border-radius: 12px;
-  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
   padding: 0.85rem;
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .room-card:hover {
-  border-color: #96aad3;
-  box-shadow: 0 8px 20px rgba(66, 96, 156, 0.08);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .room-card.active {
-  border-color: #385ea9;
-  box-shadow: 0 8px 18px rgba(56, 94, 169, 0.16);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .room-card-head {
@@ -89,30 +94,30 @@
 
 .room-card h3 {
   margin: 0;
-  font-size: 1rem;
-  color: #17243f;
+  font-size: var(--font-size-lg);
+  color: var(--color-heading);
 }
 
 .room-card p {
-  margin: 0.35rem 0 0;
-  color: #44526d;
+  margin: var(--space-xs) 0 0;
+  color: var(--color-text);
 }
 
 .room-card .equipment {
-  color: #627089;
+  color: var(--color-text-muted);
   font-size: 0.92rem;
 }
 
 .details-card {
-  border: 1px solid #d7deea;
-  border-radius: 12px;
-  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
 }
 
 .details-card h3 {
   margin: 0 0 1rem;
   font-size: 1.15rem;
-  color: #17243f;
+  color: var(--color-heading);
 }
 
 .details-grid {
@@ -122,27 +127,27 @@
 
 .details-grid span {
   display: block;
-  font-size: 0.84rem;
-  color: #5f6f8a;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 .details-grid strong {
-  color: #1a2a49;
+  color: var(--color-text);
   font-weight: 600;
 }
 
 .state {
   margin: 0.6rem 0;
-  color: #52637f;
+  color: var(--color-text-muted);
 }
 
 .state.error {
-  color: #9e2141;
+  color: var(--color-danger);
 }
 
 @media (max-width: 920px) {
   .page {
-    padding: 1rem;
+    padding: var(--space-md);
   }
 
   .layout {
