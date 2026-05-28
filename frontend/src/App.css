@@ -1,0 +1,151 @@
+.page {
+  padding: 2rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.page-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 1fr);
+  gap: 1rem;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #dbe0e8;
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: left;
+}
+
+.panel-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.secondary-btn {
+  border: 1px solid #bcc6d6;
+  background: #f8f9fc;
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.secondary-btn:hover {
+  background: #eff3fb;
+}
+
+.room-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.room-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #d7deea;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.room-card:hover {
+  border-color: #96aad3;
+  box-shadow: 0 8px 20px rgba(66, 96, 156, 0.08);
+}
+
+.room-card.active {
+  border-color: #385ea9;
+  box-shadow: 0 8px 18px rgba(56, 94, 169, 0.16);
+}
+
+.room-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.room-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #17243f;
+}
+
+.room-card p {
+  margin: 0.35rem 0 0;
+  color: #44526d;
+}
+
+.room-card .equipment {
+  color: #627089;
+  font-size: 0.92rem;
+}
+
+.details-card {
+  border: 1px solid #d7deea;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.details-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  color: #17243f;
+}
+
+.details-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.details-grid span {
+  display: block;
+  font-size: 0.84rem;
+  color: #5f6f8a;
+}
+
+.details-grid strong {
+  color: #1a2a49;
+  font-weight: 600;
+}
+
+.state {
+  margin: 0.6rem 0;
+  color: #52637f;
+}
+
+.state.error {
+  color: #9e2141;
+}
+
+@media (max-width: 920px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
