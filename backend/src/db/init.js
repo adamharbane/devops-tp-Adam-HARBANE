@@ -29,12 +29,24 @@ const schemaSql = `
 `;
 
 const seedSql = `
-  INSERT INTO rooms (name, capacity, equipment, location)
+  INSERT INTO rooms (id, name, capacity, equipment, location)
   VALUES
-    ('Salle Alpha', 8, ARRAY['ecran', 'visio'], 'Batiment A - 1er etage'),
-    ('Salle Beta', 16, ARRAY['ecran', 'tableau'], 'Batiment A - 2e etage'),
-    ('Salle Gamma', 30, ARRAY['ecran', 'sonorisation'], 'Batiment B - RDC')
-  ON CONFLICT (name) DO NOTHING;
+    (1, 'Salle 1', 8, ARRAY['ecran', 'visio'], 'Batiment A - 1er etage'),
+    (2, 'Salle 2', 12, ARRAY['ecran', 'tableau'], 'Batiment A - 2e etage'),
+    (5, 'Salle 5', 16, ARRAY['ecran', 'visio'], 'Batiment B - 1er etage'),
+    (6, 'Salle 6', 20, ARRAY['ecran', 'tableau', 'visio'], 'Batiment B - 2e etage'),
+    (7, 'Salle de reunion', 10, ARRAY['tableau'], 'Batiment C - RDC'),
+    (8, 'War Room', 14, ARRAY['ecran', 'visio', 'tableau'], 'Batiment C - 1er etage')
+  ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    capacity = EXCLUDED.capacity,
+    equipment = EXCLUDED.equipment,
+    location = EXCLUDED.location;
+
+  DELETE FROM rooms
+  WHERE id NOT IN (1, 2, 5, 6, 7, 8);
+
+  SELECT setval('rooms_id_seq', (SELECT COALESCE(MAX(id), 1) FROM rooms), true);
 `;
 
 async function waitForDatabase(maxAttempts = 30) {
