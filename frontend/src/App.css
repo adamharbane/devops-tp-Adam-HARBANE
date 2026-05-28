@@ -115,6 +115,10 @@
   color: #17243f;
 }
 
+.reservation-action {
+  margin-top: 1rem;
+}
+
 .details-grid {
   display: grid;
   gap: 0.85rem;
@@ -138,6 +142,76 @@
 
 .state.error {
   color: #9e2141;
+}
+
+.state.success {
+  color: #1f7a3f;
+}
+
+.reservation-block {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d7deea;
+}
+
+.reservation-block h3 {
+  margin: 0 0 0.8rem;
+  color: #17243f;
+}
+
+.reservation-form {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.reservation-form label {
+  margin-top: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #44526d;
+}
+
+.reservation-form input {
+  border: 1px solid #bcc6d6;
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  background: #ffffff;
+  color: #1a2a49;
+  font-size: 0.95rem;
+}
+
+.reservation-form input:focus {
+  outline: 2px solid rgba(56, 94, 169, 0.2);
+  border-color: #385ea9;
+}
+
+.primary-btn {
+  display: inline-block;
+  margin-top: 0.8rem;
+  border: 1px solid #385ea9;
+  background: #385ea9;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary-btn:hover:enabled {
+  background: #2f4f8f;
+  border-color: #2f4f8f;
+}
+
+.primary-btn:hover {
+  background: #2f4f8f;
+  border-color: #2f4f8f;
+}
+
+.primary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 @media (max-width: 920px) {
