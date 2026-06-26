@@ -1,5 +1,7 @@
 # Plateforme de reservation de salles
 
+![CI](https://github.com/adamharbane/devops-tp-Adam-HARBANE/actions/workflows/ci.yml/badge.svg)
+
 ## Description
 
 Ce projet vise a concevoir et deployer une plateforme web de reservation de salles (reunion, formation, evenement).  
