@@ -11,9 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify OpenAI secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::OPENAI_API_KEY secret is missing"
+            exit 1
+          fi
+          echo "OPENAI_API_KEY secret is configured"
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install
         run: npm ci
