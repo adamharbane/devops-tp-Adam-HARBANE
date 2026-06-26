@@ -1,2 +1,9 @@
 node_modules
 npm-debug.log
+coverage
+tests
+jest.config.js
+eslint.config.js
+.git
+.gitignore
+*.md

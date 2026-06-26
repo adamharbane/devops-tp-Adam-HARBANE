@@ -5,8 +5,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-COPY src ./src
+COPY . .
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["node", "src/server.js"]

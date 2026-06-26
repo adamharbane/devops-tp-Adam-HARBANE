@@ -1,3 +1,24 @@
+# Secrets
+.env
+.env.local
+.env.*
+!.env.example
+*.key
+
+# Dependances
+node_modules/
+vendor/
+
+# Build
+dist/
+build/
+coverage/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
 # Logs
 logs
 *.log
@@ -19,7 +40,6 @@ pids
 lib-cov
 
 # Couverture
-coverage/
 *.lcov
 
 # nyc test coverage
@@ -38,7 +58,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -65,11 +84,6 @@ web_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variable files
-.env
-.env.*
-!.env.example
-
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -80,7 +94,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 .output
 
 # Gatsby files
