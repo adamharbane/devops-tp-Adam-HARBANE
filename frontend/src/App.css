@@ -302,6 +302,133 @@
   border: 1px solid rgba(158, 33, 65, 0.2);
 }
 
+.state.success {
+  color: #1f7a3f;
+}
+
+.app-nav {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 2rem 0;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: #44526d;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+}
+
+.app-nav a.active {
+  color: #385ea9;
+  background: #eff3fb;
+}
+
+.filter-form {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.filter-form label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #44526d;
+}
+
+.filter-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.filter-row input {
+  flex: 1;
+  border: 1px solid #bcc6d6;
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.95rem;
+}
+
+.primary-btn {
+  border: 1px solid #385ea9;
+  background: #385ea9;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.primary-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.reservation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.reservation-card {
+  border: 1px solid #d7deea;
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: #ffffff;
+}
+
+.reservation-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.reservation-card h3 {
+  margin: 0;
+  color: #17243f;
+}
+
+.badge {
+  background: #eff3fb;
+  color: #385ea9;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.reservation-card p {
+  margin: 0.35rem 0;
+  color: #44526d;
+}
+
+.danger-btn {
+  margin-top: 0.7rem;
+  border: 1px solid #9e2141;
+  background: #ffffff;
+  color: #9e2141;
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.danger-btn:hover:enabled {
+  background: #9e2141;
+  color: #ffffff;
+}
+
+.danger-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 @media (max-width: 920px) {
   .page {
     padding: 0.5rem 0 0;
@@ -309,6 +436,14 @@
 
   .page-header {
     padding: 1.15rem;
+  }
+
+  .app-nav {
+    padding: 1rem 1rem 0;
+  }
+
+  .filter-row {
+    flex-direction: column;
   }
 
   .layout {
