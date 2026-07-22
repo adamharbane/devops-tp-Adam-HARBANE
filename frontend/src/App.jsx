@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import './App.css'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 const USER_NAME_STORAGE_KEY = 'reservation_user_name'
 
 function formatDateTime(value) {
@@ -49,21 +49,84 @@ function CataloguePage({
   roomsError,
   selectedRoomId,
   selectedRoomDisplay,
+  selectedInFiltered,
   detailsLoading,
   detailsError,
+  filters,
+  availableEquipments,
+  filteredRooms,
   loadRooms,
   loadRoomDetails,
   handleSelectRoom,
+  handleFilterChange,
+  handleResetFilters,
 }) {
   return (
     <main className="page">
       <header className="page-header">
+        <p className="page-eyebrow">Plateforme de reservation</p>
         <h1>Catalogue des salles</h1>
-        <p>Consulte les salles disponibles, leurs capacites et leurs equipements.</p>
+        <p className="page-subtitle">
+          Consulte les salles disponibles et filtre par nom, capacite ou equipement.
+        </p>
       </header>
 
+      {!roomsLoading && !roomsError && rooms.length > 0 && (
+        <section className="panel panel-filters">
+          <h2 className="panel-section-title">Filtres de recherche</h2>
+          <form className="room-filters" onSubmit={(event) => event.preventDefault()}>
+            <div className="filters-grid">
+              <div className="filter-field">
+                <label htmlFor="search">Nom de salle</label>
+                <input
+                  id="search"
+                  type="text"
+                  value={filters.search}
+                  onChange={(event) => handleFilterChange('search', event.target.value)}
+                  placeholder="Ex: War Room"
+                />
+              </div>
+              <div className="filter-field">
+                <label htmlFor="minCapacity">Capacite minimum</label>
+                <input
+                  id="minCapacity"
+                  type="number"
+                  min="1"
+                  value={filters.minCapacity}
+                  onChange={(event) => handleFilterChange('minCapacity', event.target.value)}
+                  placeholder="Ex: 10"
+                />
+              </div>
+              <div className="filter-field">
+                <label htmlFor="equipment">Equipement</label>
+                <select
+                  id="equipment"
+                  value={filters.equipment}
+                  onChange={(event) => handleFilterChange('equipment', event.target.value)}
+                >
+                  <option value="">Tous</option>
+                  {availableEquipments.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="filters-actions">
+              <p className="filter-result-count">
+                {filteredRooms.length} salle(s) affichee(s) sur {rooms.length}
+              </p>
+              <button type="button" className="secondary-btn" onClick={handleResetFilters}>
+                Reinitialiser
+              </button>
+            </div>
+          </form>
+        </section>
+      )}
+
       <section className="layout">
-        <div className="panel">
+        <div className="panel panel-list">
           <div className="panel-title-row">
             <h2>Liste des salles</h2>
             <button type="button" className="secondary-btn" onClick={loadRooms}>
@@ -86,9 +149,13 @@ function CataloguePage({
             <p className="state">Aucune salle disponible pour le moment.</p>
           )}
 
-          {!roomsLoading && !roomsError && rooms.length > 0 && (
+          {!roomsLoading && !roomsError && rooms.length > 0 && filteredRooms.length === 0 && (
+            <p className="state">Aucune salle ne correspond aux filtres selectionnes.</p>
+          )}
+
+          {!roomsLoading && !roomsError && filteredRooms.length > 0 && (
             <ul className="room-list">
-              {rooms.map((room) => (
+              {filteredRooms.map((room) => (
                 <li key={room.id}>
                   <button
                     type="button"
@@ -97,7 +164,7 @@ function CataloguePage({
                   >
                     <div className="room-card-head">
                       <h3>{room.name}</h3>
-                      <span>{room.capacity} places</span>
+                      <span className="capacity-badge">{room.capacity} places</span>
                     </div>
                     <p>{room.location || 'Emplacement non renseigne'}</p>
                     <p className="equipment">{equipmentLabel(room.equipment)}</p>
@@ -108,14 +175,20 @@ function CataloguePage({
           )}
         </div>
 
-        <div className="panel details">
-          <h2>Fiche salle</h2>
+        <div className="panel panel-details">
+          <h2 className="panel-section-title">Fiche salle</h2>
 
           {!selectedRoomId && <p className="state">Selectionne une salle pour voir son detail.</p>}
 
-          {selectedRoomId && detailsLoading && <p className="state">Chargement du detail...</p>}
+          {selectedRoomId && !selectedInFiltered && (
+            <p className="state">La salle selectionnee ne correspond pas aux filtres actifs.</p>
+          )}
 
-          {selectedRoomId && !detailsLoading && detailsError && (
+          {selectedRoomId && selectedInFiltered && detailsLoading && (
+            <p className="state">Chargement du detail...</p>
+          )}
+
+          {selectedRoomId && selectedInFiltered && !detailsLoading && detailsError && (
             <div className="state error">
               <p>{detailsError}</p>
               <button
@@ -128,29 +201,33 @@ function CataloguePage({
             </div>
           )}
 
-          {selectedRoomId && !detailsLoading && !detailsError && selectedRoomDisplay && (
-            <article className="details-card">
-              <h3>{selectedRoomDisplay.name}</h3>
-              <div className="details-grid">
-                <div>
-                  <span>Capacite</span>
-                  <strong>{selectedRoomDisplay.capacity} places</strong>
+          {selectedRoomId &&
+            selectedInFiltered &&
+            !detailsLoading &&
+            !detailsError &&
+            selectedRoomDisplay && (
+              <article className="details-card">
+                <h3>{selectedRoomDisplay.name}</h3>
+                <div className="details-grid">
+                  <div>
+                    <span>Capacite</span>
+                    <strong>{selectedRoomDisplay.capacity} places</strong>
+                  </div>
+                  <div>
+                    <span>Emplacement</span>
+                    <strong>{selectedRoomDisplay.location || 'Non renseigne'}</strong>
+                  </div>
+                  <div>
+                    <span>Equipements</span>
+                    <strong>{equipmentLabel(selectedRoomDisplay.equipment)}</strong>
+                  </div>
+                  <div>
+                    <span>Ajoutee le</span>
+                    <strong>{formatCreatedAt(selectedRoomDisplay.created_at)}</strong>
+                  </div>
                 </div>
-                <div>
-                  <span>Emplacement</span>
-                  <strong>{selectedRoomDisplay.location || 'Non renseigne'}</strong>
-                </div>
-                <div>
-                  <span>Equipements</span>
-                  <strong>{equipmentLabel(selectedRoomDisplay.equipment)}</strong>
-                </div>
-                <div>
-                  <span>Ajoutee le</span>
-                  <strong>{formatCreatedAt(selectedRoomDisplay.created_at)}</strong>
-                </div>
-              </div>
-            </article>
-          )}
+              </article>
+            )}
         </div>
       </section>
     </main>
@@ -308,6 +385,49 @@ function App() {
   const [selectedRoom, setSelectedRoom] = useState(null)
   const [detailsLoading, setDetailsLoading] = useState(false)
   const [detailsError, setDetailsError] = useState('')
+  const [filters, setFilters] = useState({
+    search: '',
+    minCapacity: '',
+    equipment: '',
+  })
+
+  const availableEquipments = useMemo(() => {
+    const equipmentSet = new Set()
+    rooms.forEach((room) => {
+      ;(room.equipment || []).forEach((item) => equipmentSet.add(item))
+    })
+    return [...equipmentSet].sort()
+  }, [rooms])
+
+  const filteredRooms = useMemo(() => {
+    const minCapacity = Number(filters.minCapacity)
+
+    return rooms.filter((room) => {
+      if (filters.search.trim()) {
+        const query = filters.search.trim().toLowerCase()
+        if (!room.name.toLowerCase().includes(query)) {
+          return false
+        }
+      }
+
+      if (filters.minCapacity) {
+        if (Number.isNaN(minCapacity) || room.capacity < minCapacity) {
+          return false
+        }
+      }
+
+      if (filters.equipment && !(room.equipment || []).includes(filters.equipment)) {
+        return false
+      }
+
+      return true
+    })
+  }, [rooms, filters])
+
+  const selectedInFiltered = useMemo(
+    () => filteredRooms.some((room) => room.id === selectedRoomId),
+    [filteredRooms, selectedRoomId]
+  )
 
   const selectedRoomFallback = useMemo(
     () => rooms.find((room) => room.id === selectedRoomId) || null,
@@ -335,7 +455,7 @@ function App() {
         loadRoomDetails(firstRoomId)
       }
     } catch {
-      setRoomsError('Impossible de charger les salles. Verifie que l API tourne sur le port 4000.')
+      setRoomsError('Impossible de charger les salles. Verifie que l API tourne sur le port 3000.')
     } finally {
       setRoomsLoading(false)
     }
@@ -366,6 +486,21 @@ function App() {
     loadRoomDetails(roomId)
   }
 
+  function handleFilterChange(field, value) {
+    setFilters((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+  }
+
+  function handleResetFilters() {
+    setFilters({
+      search: '',
+      minCapacity: '',
+      equipment: '',
+    })
+  }
+
   useEffect(() => {
     async function initRooms() {
       try {
@@ -389,7 +524,7 @@ function App() {
         }
       } catch {
         setRoomsError(
-          'Impossible de charger les salles. Verifie que l API tourne sur le port 4000.'
+          'Impossible de charger les salles. Verifie que l API tourne sur le port 3000.'
         )
       } finally {
         setRoomsLoading(false)
@@ -412,11 +547,17 @@ function App() {
               roomsError={roomsError}
               selectedRoomId={selectedRoomId}
               selectedRoomDisplay={selectedRoomDisplay}
+              selectedInFiltered={selectedInFiltered}
               detailsLoading={detailsLoading}
               detailsError={detailsError}
+              filters={filters}
+              availableEquipments={availableEquipments}
+              filteredRooms={filteredRooms}
               loadRooms={loadRooms}
               loadRoomDetails={loadRoomDetails}
               handleSelectRoom={handleSelectRoom}
+              handleFilterChange={handleFilterChange}
+              handleResetFilters={handleResetFilters}
             />
           }
         />
