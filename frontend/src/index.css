@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Inter, 'Segoe UI', Roboto, Arial, sans-serif;
-  background: #f4f6fb;
-  color: #1a2a49;
+  font-family: var(--font-family-base);
+  background: linear-gradient(165deg, var(--color-bg-accent) 0%, var(--color-bg) 45%, var(--color-bg) 100%);
+  color: var(--color-text);
+  line-height: 1.5;
 }
 
 #root {
-  width: min(1180px, 100%);
+  width: min(1200px, 100%);
   margin: 0 auto;
   min-height: 100vh;
+  padding: 0 1rem 2rem;
 }
